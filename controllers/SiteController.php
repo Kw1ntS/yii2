@@ -127,19 +127,16 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionMyactive($namediplom='')
+    public function actionMyactive($namediplom='',$authordiplom='',$datediplom='')
     {
 		
 		if (Yii::$app->request->post()){
 			$data = Yii::$app->request->post();
 			$diplom = Works::find()
-        ->where(['LIKE', 'name', $data['namediplom']])->all();
-        //->where(['name' => $data['namediplom']])->all();
-		//->Where(['LIKE','id_works',$data['iddiplom']])->all();
-        //$diplom = Works::find()
-        //->where(['like', 'name', '$namediplom'])
-        //->all();
-
+        ->where(['LIKE', 'name', $data['namediplom']])
+        ->orwhere(['LIKE', 'id_student', $data['authordiplom']])
+        ->orwhere(['LIKE', 'datez', $data['datediplom']])
+        ->all();
         return $this->render('myactive',['p3'=>$diplom]);
 		}
 		return $this->render('mysearch');
