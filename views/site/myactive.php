@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
   <?php $form = ActiveForm::begin() ?>
 		<?=Html::textInput('namediplom','',['placeholder' => 'Введите название диплома', 'size' => 25])?><br>
     <?=Html::textInput('authordiplom','',['placeholder' => 'Введите ФИО автора', 'size' => 25])?><br>
-    <?=Html::textInput('datediplom','',['placeholder' => 'Введите год публикации', 'size' => 25])?><br>
+		<?=Html::textInput('datediplom','',['placeholder' => 'Введите год публикации', 'size' => 25])?><br>
 		<?=Html::submitButton('Отправить', ['class' => 'btn btn-success']) ?>
     <?php 
      ActiveForm::end() 
