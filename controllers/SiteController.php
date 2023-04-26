@@ -127,18 +127,22 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    /* public function actionMyactive($namediplom='')
+    public function actionMyactive($namediplom='',$authordiplom='',$datediplom='')
     {
 		if (Yii::$app->request->post()) 
         {
-			$data = Yii::$app->request->post();
+			$data = Yii::$app->request->post($namediplom);
+            $data1 = Yii::$app->request->post($authordiplom);
+            $data2 = Yii::$app->request->post($datediplom);
 			$diplom = Works::find()
         ->where(['LIKE', 'name', $data['namediplom']])
+        ->orwhere(['LIKE', 'id_student', $data1['authordiplom']])
+        ->orwhere(['LIKE', 'datez', $data2['datediplom']])
         ->all();
         return $this->render('myactive',['p3'=>$diplom]);
 		}
 		return $this->render('mysearch');
-    } */
+    }
 
 
      /* public function actionMyactive($namediplom='',$authordiplom='',$datediplom='')
@@ -178,7 +182,7 @@ class SiteController extends Controller
         }
     } */
 
-            public function actionMyactive()
+            /* public function actionMyactive()
         {
             $query = Works::find();
 
@@ -195,5 +199,5 @@ class SiteController extends Controller
             return $this->render('search', [
                 'result' => $result,
             ]);
-        }
+        } */
 }
