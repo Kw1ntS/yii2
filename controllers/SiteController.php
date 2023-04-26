@@ -127,18 +127,73 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionMyactive($namediplom='',$authordiplom='',$datediplom='')
+    /* public function actionMyactive($namediplom='')
     {
-		
-		if (Yii::$app->request->post()){
+		if (Yii::$app->request->post()) 
+        {
 			$data = Yii::$app->request->post();
 			$diplom = Works::find()
         ->where(['LIKE', 'name', $data['namediplom']])
-       /*  ->orwhere(['LIKE', 'id_student', $data['authordiplom']])
-        ->orwhere(['LIKE', 'datez', $data['datediplom']]) */
         ->all();
         return $this->render('myactive',['p3'=>$diplom]);
 		}
 		return $this->render('mysearch');
-    }
+    } */
+
+
+     /* public function actionMyactive($namediplom='',$authordiplom='',$datediplom='')
+    {
+		if (Yii::$app->request->post($namediplom)) 
+        {
+			$data = Yii::$app->request->post();
+			$diplom = Works::find()
+            ->where(['LIKE', 'name', $data['namediplom']])
+            ->all();
+            return $this->render('myactive',['p3'=>$diplom]);
+		}
+
+        else
+        {
+            if (Yii::$app->request->post($authordiplom)) 
+            {
+                $data = Yii::$app->request->post();
+                $diplom = Works::find()
+                ->where(['LIKE', 'name', $data['authordiplom']])
+                ->all();
+                return $this->render('myactive',['p3'=>$diplom]);
+            }
+            else 
+            {
+                if (Yii::$app->request->post($datediplom)) 
+                {
+                    $data = Yii::$app->request->post();
+                    $diplom = Works::find()
+                    ->where(['LIKE', 'name', $data['datediplom']])
+                    ->all();
+                    return $this->render('myactive',['p3'=>$diplom]);
+                }
+                return $this->render('mysearch');
+            }
+            
+        }
+    } */
+
+            public function actionMyactive()
+        {
+            $query = Works::find();
+
+            $column1 = Yii::$app->request->get('namediplom');
+            $column2 = Yii::$app->request->get('authordiplom');
+            $column3 = Yii::$app->request->get('datediplom');
+
+            $query->andFilterWhere(['like', 'name', $column1])
+                ->andFilterWhere(['like', 'id_student', $column2])
+                ->andFilterWhere(['like', 'datez', $column3]);
+            
+            $result = $query->all();
+            
+            return $this->render('search', [
+                'result' => $result,
+            ]);
+        }
 }
