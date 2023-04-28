@@ -29,22 +29,3 @@
       echo $a;	 
     ?>
   </div>
-  
- 
- 
- 
- 
- <!--  <?php $form = ActiveForm::begin([
-    'id' => 'search-form',
-    'method' => 'get',
-    'action' => ['table/search'],
-    ]);
-
-    echo $form->field($model, 'namediplom')->label('Column 1');
-    echo $form->field($model, 'authordiplom')->label('Column 2');
-    echo $form->field($model, 'datediplom')->label('Column 3');
-
-    echo HTML::submitButton('Search');
-
-    ActiveForm::end();
-  ?> -->
