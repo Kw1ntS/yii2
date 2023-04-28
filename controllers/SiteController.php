@@ -136,9 +136,9 @@ class SiteController extends Controller
             $data1 = Yii::$app->request->post()['authordiplom'];
             $data2 = Yii::$app->request->post()['datediplom'];
 			$diplom = Works::find()
-                ->where(['LIKE', 'name', '%'.$data.'%'])
-                ->orwhere(['LIKE', 'id_student', '%'.$data1.'%'])
-                ->orwhere(['LIKE', 'datez', '%'.$data2.'%'])
+                ->where(['LIKE', 'name', '%'.$data.'%',false])
+                ->orwhere(['LIKE', 'id_student', '%'.$data1.'%',false])
+                ->orwhere(['LIKE', 'datez', '%'.$data2.'%',false])
                 ->all();
             return $this->render('myactive',['p3'=>$diplom]);
 		}
