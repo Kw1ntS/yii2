@@ -128,12 +128,13 @@ class SiteController extends Controller
     }
 
     public function actionMyactive($namediplom='',$authordiplom='',$datediplom='')
-    {
+    {   
+        print_r(Yii::$app->request->post());
 		if (Yii::$app->request->post()) 
         {
-			$data = Yii::$app->request->post($namediplom);
-            $data1 = Yii::$app->request->post($authordiplom);
-            $data2 = Yii::$app->request->post($datediplom);
+			$data = Yii::$app->request->post()['namediplom'];
+            $data1 = Yii::$app->request->post()['authordiplom'];
+            $data2 = Yii::$app->request->post()['datediplom'];
 			$diplom = Works::find()
         ->where(['LIKE', 'name', $data['namediplom']])
         ->orwhere(['LIKE', 'id_student', $data1['authordiplom']])
