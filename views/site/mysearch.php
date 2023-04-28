@@ -10,7 +10,7 @@
 
   <div class="site-about">
         
-    <?php $form = ActiveForm::begin() ?>
+    <?php $form = ActiveForm::begin(['method'=> 'post']) ?>
     <?=
       Html::textInput('namediplom','',['placeholder' => 'Введите название диплома', 'size' => 25]),
       Html::textInput('authordiplom','',['placeholder' => 'Введите автора диплома', 'size' => 25]),
