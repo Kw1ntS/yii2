@@ -127,21 +127,27 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionMyactive($namediplom='',$authordiplom='',$datediplom='')
-    {   
-        
-		if (Yii::$app->request->post()) 
+    public function actionMyactive($namediplom = '', $authordiplom = '', $datediplom = '')
+    {
+        if (Yii::$app->request->post()) 
         {
-			$data = Yii::$app->request->post()['namediplom'];
+            $data = Yii::$app->request->post()['namediplom'];
             $data1 = Yii::$app->request->post()['authordiplom'];
             $data2 = Yii::$app->request->post()['datediplom'];
-			$diplom = Works::find()
-                ->where(['LIKE', 'name', '%'.$data.'%',false])
-                ->orwhere(['LIKE', 'id_student', '%'.$data1.'%',false])
-                ->orwhere(['LIKE', 'datez', '%'.$data2.'%',false])
-                ->all();
-            return $this->render('myactive',['p3'=>$diplom]);
-		}
-		    return $this->render('mysearch');
+            
+            $query = Works::find();
+            if (!empty($data)) {
+                $query->andWhere(['LIKE', 'name', '%'.$data.'%', false]);
+            }
+            if (!empty($data1)) {
+                $query->andWhere(['LIKE', 'id_student', '%'.$data1.'%', false]);
+            }
+            if (!empty($data2)) {
+                $query->andWhere(['LIKE', 'datez', '%'.$data2.'%', false]);
+            }
+            $diplom = $query->all();
+            return $this->render('myactive', ['p3' => $diplom]);
+        }
+        return $this->render('mysearch');
     }
 }

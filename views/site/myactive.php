@@ -15,18 +15,60 @@
       Html::textInput('namediplom','',['placeholder' => 'Введите название диплома', 'size' => 25]),
       Html::textInput('authordiplom','',['placeholder' => 'Введите автора диплома', 'size' => 25]),
       Html::textInput('datediplom','',['placeholder' => 'Введите дату диплома', 'size' => 25])
-    ?><br>
-    <?=Html::submitButton('Отправить', ['class' => 'btn btn-success'])?>
-      
-    <?php ActiveForm::end()?>  
-    
-    <?
-      $a='';
-      //print_r($p3);
-      foreach ($p3 as $pvlue) {
-        $a=$a.$pvlue['id_works'].' '.$pvlue['id_student'].' '.$pvlue['id_sotrudnik'].' '.$pvlue['datez'].' '.$pvlue['name'].'<br>';	
-      }
-      echo $a;	 
     ?>
-    
-  </div>
+    <?=Html::submitButton('Отправить', ['class' => 'btn btn-success'])?>
+     
+    <?php ActiveForm::end()?>  
+    </div>
+
+	<head>
+		<style>
+			table 
+			{
+				border-collapse: collapse;
+				width: 100%;
+			}
+
+			table th, table td 
+			{
+				padding: 8px;
+				text-align: center;
+				border-bottom: 1px solid #ddd;
+			}
+
+			table th 
+			{
+				text-align: center;
+				background-color: #f2f2f2;
+				color: #000;
+			}
+		</style>
+	</head>
+	<body>
+		<br>
+		<table>
+			<thead>
+				<tr>
+					<th>№</th>
+					<th>Name</th>
+					<th>Author</th>
+					<th>Prepodovatel</th>
+					<th>Date</th>
+					<!-- Здесь могут быть другие заголовки столбцов -->
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach($p3 as $work): ?>
+					<tr>
+						<td><?= $work->id_works; ?></td>
+						<td><?= $work->name; ?></td>
+						<td><?= $work->id_student; ?></td>
+						<td><?= $work->id_sotrudnik; ?></td>
+						<td><?= $work->datez; ?></td>
+						<!-- Здесь могут быть другие ячейки таблицы -->
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</body> 
+  
