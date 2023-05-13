@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Works;
+use yii\data\Pagination;
 
 class SiteController extends Controller
 {
@@ -145,8 +146,20 @@ class SiteController extends Controller
             if (!empty($data2)) {
                 $query->andWhere(['LIKE', 'datez', '%'.$data2.'%', false]);
             }
-            $diplom = $query->all();
-            return $this->render('myactive', ['p3' => $diplom]);
+                        
+            $pagination = new Pagination
+            ([
+                'defaultPageSize' => 2,
+                'totalCount'=> $query->all(),
+            ]);
+            
+            $model = $query->offset($pagination->offset)->limit($pagination->limit)->all();
+            
+            return $this->render('myactive', 
+            [
+                'page' => $pagination,
+                'model'=> $model,
+            ]);
         }
         return $this->render('mysearch');
     }

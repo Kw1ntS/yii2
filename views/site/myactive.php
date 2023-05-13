@@ -4,6 +4,7 @@
 
       use yii\helpers\Html;
       use yii\widgets\ActiveForm;
+	  use yii\widgets\LinkPager; 
 
       $this->params['breadcrumbs'][] = $this->title;
     ?>
@@ -20,55 +21,66 @@
      
     <?php ActiveForm::end()?>  
     </div>
-
+	
 	<head>
-		<style>
-			table 
-			{
-				border-collapse: collapse;
-				width: 100%;
-			}
+        <style>
+            table 
+            {
+                border-collapse: collapse;
+                width: 100%;
+            }
 
-			table th, table td 
-			{
-				padding: 8px;
-				text-align: center;
-				border-bottom: 1px solid #ddd;
-			}
+            table th, table td 
+            {
+                padding: 8px;
+                text-align: center;
+                border-bottom: 1px solid #ddd;
+            }
 
-			table th 
-			{
-				text-align: center;
-				background-color: #f2f2f2;
-				color: #000;
-			}
-		</style>
-	</head>
+            table th 
+            {
+                text-align: center;
+                background-color: #f2f2f2;
+                color: #000;
+            }
+        </style>
+    </head>
 	<body>
-		<br>
-		<table>
-			<thead>
-				<tr>
-					<th>№</th>
-					<th>Name</th>
-					<th>Author</th>
-					<th>Prepodovatel</th>
-					<th>Date</th>
-					<!-- Здесь могут быть другие заголовки столбцов -->
-				</tr>
-			</thead>
-			<tbody>
-				<?php foreach($p3 as $work): ?>
+		<br>		
+			<table>
+				<thead>
 					<tr>
-						<td><?= $work->id_works; ?></td>
-						<td><?= $work->name; ?></td>
-						<td><?= $work->id_student; ?></td>
-						<td><?= $work->id_sotrudnik; ?></td>
-						<td><?= $work->datez; ?></td>
-						<!-- Здесь могут быть другие ячейки таблицы -->
+						<th>№</th>
+						<th>Name</th>
+						<th>Author</th>
+						<th>Prepodovatel</th>
+						<th>Date</th>
 					</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
-	</body> 
+				</thead>
+				<tbody>
+					<?php 
+						foreach($model as $work):						
+					?>
+						<tr>
+							<td><?= $work->id_works; ?></td>
+							<td><?= $work->name; ?></td>
+							<td><?= $work->id_student; ?></td>
+							<td><?= $work->id_sotrudnik; ?></td>
+							<td><?= $work->datez; ?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+
+			<div class="pagination">			
+			<?
+				echo LinkPager::widget
+						([
+							'pagination'=>$page,
+							'prevPageLabel' => false,
+							'nextPageLabel' => false,
+
+						]);
+			?>		
+			</div>
   
