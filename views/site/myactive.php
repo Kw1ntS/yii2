@@ -23,6 +23,7 @@
     </div>
 	
 	<head>
+	<link rel="stylesheet" href="C:\OSPanel\domains\yii2\web\css\pagination.css">
         <style>
             table 
             {
@@ -45,42 +46,41 @@
             }
         </style>
     </head>
-	<body>
-		<br>		
-			<table>
-				<thead>
+	<body><br>				
+		<table>
+			<thead>
+				<tr>
+					<th>№</th>
+					<th>Name</th>
+					<th>Author</th>
+					<th>Prepodovatel</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php 
+					foreach($models as $work):						
+				?>
 					<tr>
-						<th>№</th>
-						<th>Name</th>
-						<th>Author</th>
-						<th>Prepodovatel</th>
-						<th>Date</th>
+						<td><?= $work->id_works; ?></td>
+						<td><?= $work->name; ?></td>
+						<td><?= $work->id_student; ?></td>
+						<td><?= $work->id_sotrudnik; ?></td>
+						<td><?= $work->datez; ?></td>
 					</tr>
-				</thead>
-				<tbody>
-					<?php 
-						foreach($model as $work):						
-					?>
-						<tr>
-							<td><?= $work->id_works; ?></td>
-							<td><?= $work->name; ?></td>
-							<td><?= $work->id_student; ?></td>
-							<td><?= $work->id_sotrudnik; ?></td>
-							<td><?= $work->datez; ?></td>
-						</tr>
-					<?php endforeach; ?>
-				</tbody>
-			</table>
-
-			<div class="pagination">			
-			<?
-				echo LinkPager::widget
-						([
-							'pagination'=>$page,
-							'prevPageLabel' => false,
-							'nextPageLabel' => false,
-
-						]);
-			?>		
-			</div>
-  
+				<?php 
+					endforeach; 
+				?>
+			</tbody>
+		</table>
+	
+		
+		<div class="pagination">
+			<?php 
+				echo LinkPager::widget([
+					'pagination' => $pages,
+					'registerLinkTags' => true
+				]); 
+			?>
+		</div>
+ 	</body>

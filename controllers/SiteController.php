@@ -149,16 +149,16 @@ class SiteController extends Controller
                         
             $pagination = new Pagination
             ([
-                'defaultPageSize' => 2,
-                'totalCount'=> $query->all(),
+                'PageSize' => 2,
+                'totalCount'=> $query->count(),
             ]);
             
-            $model = $query->offset($pagination->offset)->limit($pagination->limit)->all();
+            $models = $query->offset($pagination->offset)->limit($pagination->limit)->all();
             
             return $this->render('myactive', 
             [
-                'page' => $pagination,
-                'model'=> $model,
+                'pages' => $pagination,
+                'models'=> $models,
             ]);
         }
         return $this->render('mysearch');
