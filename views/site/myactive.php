@@ -2,52 +2,39 @@
 
       /** @var yii\web\View $this */
 
-      use yii\helpers\Html;
-      use yii\widgets\ActiveForm;
-	  use yii\widgets\LinkPager; 
+      //use yii\helpers\Html;
+      use yii\bootstrap5\ActiveForm;
+	  use yii\bootstrap5\Breadcrumbs;
+	  use yii\bootstrap5\LinkPager;
+	  use yii\bootstrap5\Html;
 
-      $this->params['breadcrumbs'][] = $this->title;
+    $this->params['breadcrumbs'][] = $this->title;
     ?>
 
-  <div class="site-about">
-      
-    <?php $form = ActiveForm::begin(['method'=> 'post']) ?>
-    <?=
-      Html::textInput('namediplom','',['placeholder' => 'Введите название диплома', 'size' => 25]),
-      Html::textInput('authordiplom','',['placeholder' => 'Введите автора диплома', 'size' => 25]),
-      Html::textInput('datediplom','',['placeholder' => 'Введите дату диплома', 'size' => 25])
-    ?>
-    <?=Html::submitButton('Отправить', ['class' => 'btn btn-success'])?>
-     
-    <?php ActiveForm::end()?>  
+  	<div class="site-about">      
+		<?php $form = ActiveForm::begin(['method'=> 'post'])?>
+		<label for="inputName" class="form-label">Название диплома</label>
+		<?=Html::textInput('namediplom','',['placeholder' => 'Введите название диплома', 'size' => 25, 'class' => "form-control",'type'=>"text"])?>
+		<label for="inputAuthor" class="form-label">Имя автора</label>
+		<?=Html::textInput('authordiplom','',['placeholder' => 'Введите автора диплома', 'size' => 25,'class' => "form-control",'type'=>"text"])?>
+		<label for="inputDate" class="form-label">Дата</label>
+		<?=Html::textInput('datediplom','',['placeholder' => 'Введите дату диплома', 'size' => 25,'class' => "form-control",'type'=>"date"])?>
+		<br>
+		<?=
+		Html::submitButton('Отправить', ['class' => 'btn btn-outline-danger'])
+		?>
+		
+		<?php ActiveForm::end()?>  
     </div>
 	
 	<head>
 	<link rel="stylesheet" href="C:\OSPanel\domains\yii2\web\css\pagination.css">
         <style>
-            table 
-            {
-                border-collapse: collapse;
-                width: 100%;
-            }
 
-            table th, table td 
-            {
-                padding: 8px;
-                text-align: center;
-                border-bottom: 1px solid #ddd;
-            }
-
-            table th 
-            {
-                text-align: center;
-                background-color: #f2f2f2;
-                color: #000;
-            }
         </style>
     </head>
 	<body><br>				
-		<table>
+		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>№</th>
@@ -73,13 +60,11 @@
 				?>
 			</tbody>
 		</table>
-	
-		
+
 		<div class="pagination">
 			<?php 
 				echo LinkPager::widget([
-					'pagination' => $pages,
-					'registerLinkTags' => true
+					'pagination' => $pages
 				]); 
 			?>
 		</div>

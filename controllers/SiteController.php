@@ -154,6 +154,10 @@ class SiteController extends Controller
             ]);
             
             $models = $query->offset($pagination->offset)->limit($pagination->limit)->all();
+
+            \Yii::$app->getView()->params['namediplom'] = $data;
+            \Yii::$app->getView()->params['authordiplom'] = $data1;
+            \Yii::$app->getView()->params['datediplom'] = $data2;
             
             return $this->render('myactive', 
             [
