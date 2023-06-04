@@ -9,33 +9,23 @@ use Yii;
  *
  * @property int $id_works
  * @property int $id_student
- * @property string|null $id_sotrudnik
- * @property string|null $datez
- * @property string|null $name
- * @property int|null $id_speciаlty
- * @property string|null $status
- * @property string|null $typew
- * @property string|null $ozenka
- * @property string|null $mycheckwork
- * @property string|null $docmycheckwork
- * @property float|null $myoriginalwork
- * @property string|null $intercheckwork
- * @property string|null $docintercheckwork
- * @property float|null $interoriginalwork
- * @property string|null $publicwork
- * @property string|null $filework
- * @property string|null $statuswork
- * @property int $id_podpis
- * @property string|null $annotaciy
- * @property string|null $zadanie
- * @property string|null $otziv
- * @property string|null $vnedrenie
- * @property string|null $rec
- * @property string|null $titul
- * @property string|null $soderjanie
- * @property string|null $tekst
- * @property string|null $priloj
- * @property string|null $konecvkr
+ * @property string $id_sotrudnik
+ * @property string $id_speciаlty
+ * @property string $id_podpis
+ * @property string $datez
+ * @property string $name
+ * @property string $status
+ * @property string $typew
+ * @property string $ozenka
+ * @property string $mycheckwork
+ * @property string $docmycheckwork
+ * @property float $myoriginalwork
+ * @property string $intercheckwork
+ * @property string $docintercheckwork
+ * @property float $interoriginalwork
+ * @property string $publicwork
+ * @property string $filework
+ * @property string $statuswork
  */
 class Works extends \yii\db\ActiveRecord
 {
@@ -53,11 +43,10 @@ class Works extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_student', 'id_speciаlty', 'id_podpis'], 'integer'],
-            [['datez'], 'safe'],
-            [['status', 'typew', 'ozenka', 'mycheckwork', 'intercheckwork', 'publicwork', 'statuswork'], 'string'],
+            [['id_student', 'id_sotrudnik', 'id_speciаlty', 'id_podpis', 'datez', 'name', 'status', 'typew', 'ozenka', 'mycheckwork', 'docmycheckwork', 'myoriginalwork', 'intercheckwork', 'docintercheckwork', 'interoriginalwork', 'publicwork', 'filework', 'statuswork'], 'required'],
+            [['id_student'], 'integer'],
             [['myoriginalwork', 'interoriginalwork'], 'number'],
-            [['id_sotrudnik', 'name', 'docmycheckwork', 'docintercheckwork', 'filework', 'annotaciy', 'zadanie', 'otziv', 'vnedrenie', 'rec', 'titul', 'soderjanie', 'tekst', 'priloj', 'konecvkr'], 'string', 'max' => 255],
+            [['id_sotrudnik', 'id_speciаlty', 'id_podpis', 'datez', 'name', 'status', 'typew', 'ozenka', 'mycheckwork', 'docmycheckwork', 'intercheckwork', 'docintercheckwork', 'publicwork', 'filework', 'statuswork'], 'string', 'max' => 256],
         ];
     }
 
@@ -70,9 +59,10 @@ class Works extends \yii\db\ActiveRecord
             'id_works' => 'Id Works',
             'id_student' => 'Id Student',
             'id_sotrudnik' => 'Id Sotrudnik',
+            'id_speciаlty' => 'Id Speciаlty',
+            'id_podpis' => 'Id Podpis',
             'datez' => 'Datez',
             'name' => 'Name',
-            'id_speciаlty' => 'Id Speciаlty',
             'status' => 'Status',
             'typew' => 'Typew',
             'ozenka' => 'Ozenka',
@@ -85,17 +75,6 @@ class Works extends \yii\db\ActiveRecord
             'publicwork' => 'Publicwork',
             'filework' => 'Filework',
             'statuswork' => 'Statuswork',
-            'id_podpis' => 'Id Podpis',
-            'annotaciy' => 'Annotaciy',
-            'zadanie' => 'Zadanie',
-            'otziv' => 'Otziv',
-            'vnedrenie' => 'Vnedrenie',
-            'rec' => 'Rec',
-            'titul' => 'Titul',
-            'soderjanie' => 'Soderjanie',
-            'tekst' => 'Tekst',
-            'priloj' => 'Priloj',
-            'konecvkr' => 'Konecvkr',
         ];
     }
 }

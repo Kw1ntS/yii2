@@ -12,13 +12,13 @@
     ?>
 
   	<div class="site-about">      
-		<?php $form = ActiveForm::begin(['method'=> 'post'])?>
+		<?php $form = ActiveForm::begin(['method'=> 'get'])?>
 		<label for="inputName" class="form-label">Название диплома</label>
-		<?=Html::textInput('namediplom','',['placeholder' => 'Введите название диплома', 'size' => 25, 'class' => "form-control",'type'=>"text"])?>
+		<?=Html::textInput('namediplom',$this->params['namediplom']==''?'': $this->params['namediplom'],['placeholder' => 'Введите название диплома', 'size' => 25, 'class' => "form-control",'type'=>"text"])?>
 		<label for="inputAuthor" class="form-label">Имя автора</label>
-		<?=Html::textInput('authordiplom','',['placeholder' => 'Введите автора диплома', 'size' => 25,'class' => "form-control",'type'=>"text"])?>
+		<?=Html::textInput('curatordiplom',$this->params['curatordiplom']==''?'': $this->params['curatordiplom'],['placeholder' => 'Введите автора диплома', 'size' => 25,'class' => "form-control",'type'=>"text"])?>
 		<label for="inputDate" class="form-label">Дата</label>
-		<?=Html::textInput('datediplom','',['placeholder' => 'Введите дату диплома', 'size' => 25,'class' => "form-control",'type'=>"date"])?>
+		<?=Html::textInput('datediplom',$this->params['datediplom']==''?'': $this->params['datediplom'],['placeholder' => 'Введите дату диплома', 'size' => 25,'class' => "form-control",'type'=>"date"])?>
 		<br>
 		<?=
 		Html::submitButton('Отправить', ['class' => 'btn btn-outline-danger'])
@@ -39,65 +39,33 @@
 				<tr>
 					<th>№</th>
 					<th>Name</th>
-					<th>Author</th>
+					<th>Student</th>
 					<th>Prepodovatel</th>
+					<th>Specialitet</th>
+					<th>Type</th>
 					<th>Date</th>
+					<th>ozenka</th>
 				</tr>
 			</thead>
 			<tbody>
 				<?php 
-					foreach($models as $work):						
+					foreach($models as $works):						
 				?>
 					<tr>
-						<td><?= $work->id_works; ?></td>
-						<td><?= $work->name; ?></td>
-						<td><?= $work->id_student; ?></td>
-						<td><?= $work->id_sotrudnik; ?></td>
-						<td><?= $work->datez; ?></td>
+						<td><?= $works->id_works; ?></td>
+						<td><?= $works->name; ?></td>
+						<td><?= $works->id_student; ?></td>
+						<td><?= $works->id_sotrudnik; ?></td>
+						<td><?= $works->id_specialty; ?></td>
+						<td><?= $works->typew; ?></td>
+						<td><?= $works->datez; ?></td>
+						<td><?= $works->ozenka; ?></td>
 					</tr>
 				<?php 
 					endforeach; 
 				?>
 			</tbody>
 		</table>
-
-	<div class="row mt-5">
-		<div class="col-12">
-			<h3>Результаты поиска</h3>
-		</div>
-		<div class="col-md-4">
-			<div class="card mb-4 shadow">
-				<img src="https://via.placeholder.com/300x200.png" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title"><?= $work->name?></h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Подробнее</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="card mb-4 shadow">
-				<img src="https://via.placeholder.com/300x200.png" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title"><?= $work->name?></h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Подробнее</a>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-4">
-			<div class="card mb-4 shadow">
-				<img src="https://via.placeholder.com/300x200.png" class="card-img-top" alt="...">
-				<div class="card-body">
-					<h5 class="card-title">Заголовок публикации</h5>
-					<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-					<a href="#" class="btn btn-primary">Подробнее</a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-  </div>
 
 		<div class="pagination">
 			<?php 

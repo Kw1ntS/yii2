@@ -21,11 +21,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_sotrudnik') ?>
 
-    <?= $form->field($model, 'datez') ?>
+    <?= $form->field($model, 'id_speciаlty') ?>
 
-    <?= $form->field($model, 'name') ?>
+    <?= $form->field($model, 'id_podpis') ?>
 
-    <?php // echo $form->field($model, 'id_speciаlty') ?>
+    <?php // echo $form->field($model, 'datez') ?>
+
+    <?php // echo $form->field($model, 'name') ?>
 
     <?php // echo $form->field($model, 'status') ?>
 
@@ -50,28 +52,6 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'filework') ?>
 
     <?php // echo $form->field($model, 'statuswork') ?>
-
-    <?php // echo $form->field($model, 'id_podpis') ?>
-
-    <?php // echo $form->field($model, 'annotaciy') ?>
-
-    <?php // echo $form->field($model, 'zadanie') ?>
-
-    <?php // echo $form->field($model, 'otziv') ?>
-
-    <?php // echo $form->field($model, 'vnedrenie') ?>
-
-    <?php // echo $form->field($model, 'rec') ?>
-
-    <?php // echo $form->field($model, 'titul') ?>
-
-    <?php // echo $form->field($model, 'soderjanie') ?>
-
-    <?php // echo $form->field($model, 'tekst') ?>
-
-    <?php // echo $form->field($model, 'priloj') ?>
-
-    <?php // echo $form->field($model, 'konecvkr') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

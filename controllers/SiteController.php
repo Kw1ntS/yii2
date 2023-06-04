@@ -128,20 +128,24 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionMyactive($namediplom = '', $authordiplom = '', $datediplom = '')
+    public function actionMyactive($namediplom = '', $curatordiplom = '', $datediplom = '')
     {
-        if (Yii::$app->request->post()) 
+        //if (Yii::$app->request->post()) 
         {
-            $data = Yii::$app->request->post()['namediplom'];
-            $data1 = Yii::$app->request->post()['authordiplom'];
-            $data2 = Yii::$app->request->post()['datediplom'];
+            //$data = Yii::$app->request->post()['namediplom'];
+            //$data1 = Yii::$app->request->post()['authordiplom'];
+            //$data2 = Yii::$app->request->post()['datediplom'];
+
+            $data = $namediplom;//Yii::$app->request->post()['namediplom'];
+            $data1 =$curatordiplom;// Yii::$app->request->post()['authordiplom'];
+            $data2 =$datediplom;// Yii::$app->request->post()['datediplom'];
             
             $query = Works::find();
             if (!empty($data)) {
                 $query->andWhere(['LIKE', 'name', '%'.$data.'%', false]);
             }
             if (!empty($data1)) {
-                $query->andWhere(['LIKE', 'id_student', '%'.$data1.'%', false]);
+                $query->andWhere(['LIKE', 'id_sotrudnik', '%'.$data1.'%', false]);
             }
             if (!empty($data2)) {
                 $query->andWhere(['LIKE', 'datez', '%'.$data2.'%', false]);
@@ -156,7 +160,7 @@ class SiteController extends Controller
             $models = $query->offset($pagination->offset)->limit($pagination->limit)->all();
 
             \Yii::$app->getView()->params['namediplom'] = $data;
-            \Yii::$app->getView()->params['authordiplom'] = $data1;
+            \Yii::$app->getView()->params['curatordiplom'] = $data1;
             \Yii::$app->getView()->params['datediplom'] = $data2;
             
             return $this->render('myactive', 
@@ -165,6 +169,6 @@ class SiteController extends Controller
                 'models'=> $models,
             ]);
         }
-        return $this->render('mysearch');
+        //return $this->render('mysearch');
     }
 }
