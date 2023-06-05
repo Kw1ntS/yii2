@@ -8,7 +8,8 @@
 	  use yii\bootstrap5\LinkPager;
 	  use yii\bootstrap5\Html;
 
-    $this->params['breadcrumbs'][] = $this->title;
+	  $this->title = 'Search';
+	  $this->params['breadcrumbs'][] = $this->title;
     ?>
 
   	<div class="site-about">      
@@ -34,38 +35,29 @@
         </style>
     </head>
 	<body><br>				
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>№</th>
-					<th>Name</th>
-					<th>Student</th>
-					<th>Prepodovatel</th>
-					<th>Specialitet</th>
-					<th>Type</th>
-					<th>Date</th>
-					<th>ozenka</th>
-				</tr>
-			</thead>
-			<tbody>
+	<div class="position-relative">
 				<?php 
 					foreach($models as $works):						
-				?>
-					<tr>
-						<td><?= $works->id_works; ?></td>
-						<td><?= $works->name; ?></td>
-						<td><?= $works->id_student; ?></td>
-						<td><?= $works->id_sotrudnik; ?></td>
-						<td><?= $works->id_specialty; ?></td>
-						<td><?= $works->typew; ?></td>
-						<td><?= $works->datez; ?></td>
-						<td><?= $works->ozenka; ?></td>
-					</tr>
+				?>     
+
+                <div style="display: inline-block;" class="col-lg-2; w-50 p-3;">
+                   	<center><div  class="p-3 mb-2 bg-dark text-dark bg-opacity-10">
+						<strong><p class="fs-3"><?= $works->name; ?></p></strong>
+						<p class="fs-4"><?= $works->id_specialty; ?></p>
+						<p class="fs-5">Оценка: <?= $works->ozenka; ?></p>
+						<p><?= "$works->typew" ?></p>
+						<p>Руководитель: <?= $works->id_sotrudnik;?></p>                    
+						<p>Студент: <?= $works->id_student;?></p>
+						<p>№: <?= $works->id_works; ?></p>
+						<p><?= $works->datez; ?></p>
+					</div>
+                    	<p><a class="btn btn-outline-secondary" href="/web/site/contact">Подробнее</a></p></center>
+					</div> 
+
 				<?php 
 					endforeach; 
 				?>
-			</tbody>
-		</table>
+	</div>
 
 		<div class="pagination">
 			<?php 
