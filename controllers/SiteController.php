@@ -129,46 +129,40 @@ class SiteController extends Controller
     }
 
     public function actionMyactive($namediplom = '', $curatordiplom = '', $datediplom = '')
-    {
-        //if (Yii::$app->request->post()) 
+    {   
+        $data = $namediplom;
+        $data1 = $curatordiplom;
+        $data2 = $datediplom;
+        
+        ////////////////////////////////////////////////////// Инъекции SQL
+        $data = trim($data);
+        $data1 = trim($data1);
+        $data2 = trim($data2);
+
+        $white = ["ALTER", "DATABASE", "BETWEEN", "CASE", "CHECK", "CREATE", "DATABASE", "INDEX", "REPLACE", "PROCEDURE", "UNIQUE", "VIEW", "DEFAULT", "DELETE", "DESC", "DISTINCT", "DROP", "COLUMN", "CONSTRAINT", "EXEC", "EXISTS", "FOREIGN", "FROM", "OUTER", "GROUP", "HAVING", "INNER", "INSERT", "JOIN", "LEFT", "LIKE", "LIMIT", "NOT", "NULL", "ORDER", "PRIMARY", "RIGHT", "ROW", "SELECT", "TABLE", "TRUNCATE", "UNION", "UPDATE", "VALUES", "WHERE"];
+        foreach($white as $key) 
         {
-            //$data = Yii::$app->request->post()['namediplom'];
-            //$data1 = Yii::$app->request->post()['authordiplom'];
-            //$data2 = Yii::$app->request->post()['datediplom'];
-
-            $data = $namediplom;//Yii::$app->request->post()['namediplom'];
-            $data1 =$curatordiplom;// Yii::$app->request->post()['authordiplom'];
-            $data2 =$datediplom;// Yii::$app->request->post()['datediplom'];
-            
-            $query = Works::find();
-            if (!empty($data)) {
-                $query->andWhere(['LIKE', 'name', '%'.$data.'%', false]);
-            }
-            if (!empty($data1)) {
-                $query->andWhere(['LIKE', 'id_sotrudnik', '%'.$data1.'%', false]);
-            }
-            if (!empty($data2)) {
-                $query->andWhere(['LIKE', 'datez', '%'.$data2.'%', false]);
-            }
-                        
-            $pagination = new Pagination
-            ([
-                'PageSize' => 5,
-                'totalCount'=> $query->count(),
-            ]);
-            
-            $models = $query->offset($pagination->offset)->limit($pagination->limit)->all();
-
-            \Yii::$app->getView()->params['namediplom'] = $data;
-            \Yii::$app->getView()->params['curatordiplom'] = $data1;
-            \Yii::$app->getView()->params['datediplom'] = $data2;
-            
-            return $this->render('myactive', 
-            [
-                'pages' => $pagination,
-                'models'=> $models,
-            ]);
+            $b1 = [strtoupper($data), strtoupper($data1), strtoupper($data2)];
+            if(str_contains($b1[0], $key) || str_contains($b1[1], $key) || str_contains($b1[2], $key)) $this->redirect('?r=site/myactive');
         }
-        //return $this->render('mysearch');
+
+        static $pattern = "/[!@#$&*.,?-_}{\/+\=\(\)\^\:\;\`\"\\\><|]/";
+        if(preg_match($pattern, $data, $matches, PREG_OFFSET_CAPTURE) || preg_match($pattern, $data1, $matches, PREG_OFFSET_CAPTURE)) $this->redirect('?r=site/myactive');
+        //////////////////////////////////////////////////////
+
+        $query = Works::find();
+        if(!empty($data)) $query->andWhere(['LIKE', 'name', '%'.$data.'%', false]);
+        if(!empty($data1)) $query->andWhere(['LIKE', 'id_sotrudnik', '%'.$data1.'%', false]);
+        if(!empty($data2)) $query->andWhere(['LIKE', 'datez', '%'.$data2.'%', false]);
+                    
+        $pagination = new Pagination(['PageSize' => 5,'totalCount'=> $query->count()]);
+        
+        $models = $query->offset($pagination->offset)->limit($pagination->limit)->all();
+
+        \Yii::$app->getView()->params['namediplom'] = $data;
+        \Yii::$app->getView()->params['curatordiplom'] = $data1;
+        \Yii::$app->getView()->params['datediplom'] = $data2;
+        
+        return $this->render('myactive',['pages' => $pagination,'models'=> $models]);
     }
 }
